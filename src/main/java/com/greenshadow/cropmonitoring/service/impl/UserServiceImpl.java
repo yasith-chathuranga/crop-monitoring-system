@@ -1,4 +1,15 @@
 package com.greenshadow.cropmonitoring.service.impl;
 
-public class UserServiceImpl {
+import com.greenshadow.cropmonitoring.service.UserService;
+
+public class UserServiceImpl implements UserService {
+    @Override
+    public void login() {
+
+    }
+
+    @Override
+    public void logout() {
+
+    }
 }
