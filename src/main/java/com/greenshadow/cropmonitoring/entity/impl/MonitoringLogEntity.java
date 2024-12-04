@@ -1,5 +1,6 @@
 package com.greenshadow.cropmonitoring.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenshadow.cropmonitoring.entity.SuperEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,24 +17,34 @@ import java.util.List;
 @Table(name = "monitoring_log")
 public class MonitoringLogEntity implements SuperEntity {
     @Id
+    @Column(name = "log_code")
     private String logCode;
     private Date logDate;
     private String logDetails;
     @Column(columnDefinition = "LONGTEXT")
     private String observedImage;
     @ManyToMany
-    @JoinTable(name = "crop_log_details",
-            joinColumns = @JoinColumn(name = "log_code"),
-            inverseJoinColumns = @JoinColumn(name = "crop_code"))
-    private List<CropEntity> crops;
+    @JsonIgnore
+    @JoinTable(
+            name = "field_log",
+            joinColumns = @JoinColumn(name = "field_code"),
+            inverseJoinColumns = @JoinColumn(name = "log_code")
+    )
+    private List<FieldEntity> field;
     @ManyToMany
-    @JoinTable(name = "field_log_details",
+    @JsonIgnore
+    @JoinTable(
+            name = "log_crop_details",
             joinColumns = @JoinColumn(name = "log_code"),
-            inverseJoinColumns = @JoinColumn(name = "field_code"))
-    private List<FieldEntity> fields;
+            inverseJoinColumns = @JoinColumn(name = "crop_code")
+    )
+    private List<CropEntity> crop;
     @ManyToMany
-    @JoinTable(name = "staff_log_details",
+    @JsonIgnore
+    @JoinTable(
+            name = "log_staff",
             joinColumns = @JoinColumn(name = "log_code"),
-            inverseJoinColumns = @JoinColumn(name = "staff_id"))
+            inverseJoinColumns = @JoinColumn(name = "id")
+    )
     private List<StaffEntity> staff;
 }
