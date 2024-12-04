@@ -1,8 +1,8 @@
 package com.greenshadow.cropmonitoring.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenshadow.cropmonitoring.entity.SuperEntity;
 import com.greenshadow.cropmonitoring.entity.enums.Gender;
-import com.greenshadow.cropmonitoring.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +18,7 @@ import java.util.List;
 @Table(name = "staff")
 public class StaffEntity implements SuperEntity {
     @Id
+    @Column(name = "id")
     private String id;
     private String firstName;
     private String lastName;
@@ -33,14 +34,17 @@ public class StaffEntity implements SuperEntity {
     private String addressCode;
     private String contactNo;
     private String email;
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    @ManyToMany
-    @JoinTable(name = "staff_field_details",
-    joinColumns = @JoinColumn(name = "staff_id"),
-    inverseJoinColumns = @JoinColumn(name = "field_code"))
-    private List<FieldEntity> fields;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_staff_id",referencedColumnName = "id")
+    private String role;
+    @ManyToMany(mappedBy = "staff")
+    @JsonIgnore
+    private List<FieldEntity> field;
+    @OneToMany(mappedBy = "staff")
+    @JsonIgnore
     private List<VehicleEntity> vehicles;
+    @ManyToMany(mappedBy = "staff")
+    @JsonIgnore
+    private List<MonitoringLogEntity> monitoringLogs;
+    @OneToOne(mappedBy = "staff",optional = true)
+    @JsonIgnore
+    private EquipmentEntity equipment;
 }
