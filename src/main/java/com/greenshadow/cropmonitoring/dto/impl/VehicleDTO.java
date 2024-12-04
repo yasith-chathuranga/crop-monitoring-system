@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -19,5 +16,5 @@ public class VehicleDTO implements SuperDTO, VehicleResponse {
     private String fuelType;
     private String status;
     private String remarks;
-    private List<StaffDTO> allocateStaff = new ArrayList<>();
+    private String staffId;
 }
