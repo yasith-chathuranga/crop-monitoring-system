@@ -23,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class MonitoringLogController {
-    @Autowired
     private final MonitoringLogService monitoringLogService;
     @PostMapping
     public ResponseEntity<?> saveMonitoringLog(
@@ -48,6 +47,7 @@ public class MonitoringLogController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
     @PatchMapping(value = "/{logCode}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> updateMonitoringLog(
             @PathVariable ("logCode") String logCode,
@@ -67,6 +67,7 @@ public class MonitoringLogController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @DeleteMapping("/{logCode}")
     public ResponseEntity<Void> deleteMonitoringLog(@PathVariable ("logCode") String logCode) {
         try {
@@ -78,6 +79,7 @@ public class MonitoringLogController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping(value = "/{logCode}",produces = MediaType.APPLICATION_JSON_VALUE)
     public MonitoringLogResponse getSelectedMonitoringLog(@PathVariable ("logCode") String logCode){
         if(logCode.isEmpty() || logCode == null){
@@ -85,6 +87,7 @@ public class MonitoringLogController {
         }
         return monitoringLogService.getSelectedMonitoringLog(logCode);
     }
+
     @GetMapping(value = "allMonitoringLogs", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<MonitoringLogDTO> getAllMonitoringLogs(){
         return monitoringLogService.getAllMonitoringLogs();

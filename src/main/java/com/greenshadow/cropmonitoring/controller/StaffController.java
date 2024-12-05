@@ -20,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class StaffController {
-    @Autowired
     private final StaffService staffService;
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveStaff(@RequestBody StaffDTO staff) {
@@ -37,6 +36,7 @@ public class StaffController {
             }
         }
     }
+
     @PatchMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateStaff(@PathVariable ("id") String id, @RequestBody StaffDTO staff) {
         try {
@@ -51,6 +51,7 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @DeleteMapping(value ="/{id}" )
     public ResponseEntity<Void> deleteStaff(@PathVariable ("id") String id) {
         try {
@@ -62,6 +63,7 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public StaffResponse getSelectedVehicle(@PathVariable ("id") String id)  {
         if(id.isEmpty() || id == null){
@@ -69,6 +71,7 @@ public class StaffController {
         }
         return staffService.getSelectedStaff(id);
     }
+
     @GetMapping(value = "allStaffs", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getAllStaffs(){
         return staffService.getAllStaff();
