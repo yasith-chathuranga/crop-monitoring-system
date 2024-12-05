@@ -36,6 +36,9 @@ Validation is implemented using Hibernate Validator annotations in the DTO class
 
 Logging is configured using Logback. Logs are written to both the console and a file.
 
+## Frontend Repository Link   
+      https://github.com/yasith-chathuranga/crop-monitoring-system-frontend.git
+
 ## Postman Documentation
 
 For detailed API documentation and testing, please refer to the [Postman API Documentation](https://documenter.getpostman.com/view/37565373/2sAYBaAVdi).
@@ -62,8 +65,8 @@ To run this project, ensure you have the following installed:
     ```java
     spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
     spring.datasource.url=jdbc:mysql://localhost:3306/green_shadow?createDatabaseIfNotExist=true
-    spring.datasource.username=root
-    spring.datasource.password=Ijse@1234
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
 
 
 ##
