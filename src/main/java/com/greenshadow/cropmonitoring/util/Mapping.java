@@ -13,6 +13,14 @@ import java.util.List;
 public class Mapping {
     @Autowired
     private ModelMapper modelMapper;
+
+    //matters of UserEntity and DTO
+    public UserDTO convertToDTO(UserEntity user) {
+        return modelMapper.map(user, UserDTO.class);
+    }
+    public UserEntity convertToEntity(UserDTO dto) {
+        return modelMapper.map(dto, UserEntity.class);
+    }
     //matters of CropEntity and DTO
     public CropDTO convertToDTO(CropEntity crop) {
         return modelMapper.map(crop, CropDTO.class);
